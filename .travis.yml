@@ -49,10 +49,9 @@ matrix:
     env:
       - MSBUILD_PATH="c:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin"
     before_install:
-      - choco install python3
-      - export PATH="/C/Python37:/C/Python37/Scripts:$PATH"
-      - python --version
-      - python -m pip install awscli
+      - choco install python3 --version 3.7.4 --params "/InstallDir:C:\\Python"
+      - export PATH="/c/Python:/c/Python/Scripts:$PATH"
+      - python -m pip install --upgrade pip wheel
       - choco install 7zip
       - wget -O premake5.zip https://github.com/premake/premake-core/releases/download/v5.0.0-alpha14/premake-5.0.0-alpha14-windows.zip
       - unzip premake5.zip
