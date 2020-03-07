@@ -22,6 +22,7 @@ matrix:
     install: true
     script: make config=release
     after_success:
+      - tree $FBX_SDK_ROOT
       - ls $LD_LIBRARY_PATH
       - cp $LD_LIBRARY_PATH/libfbxsdk.so bin/Release/
       - zip fbx-conv-linux.zip bin/Release/libfbxsdk.so bin/Release/fbx-conv
