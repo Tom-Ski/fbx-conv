@@ -1,8 +1,8 @@
 git:
     depth: 3
-before_install:
-  - pip install --user awscli
 matrix:
+  before_install:
+  - pip install --user awscli
   include:
   - name: "Linux FBX-Conv build"
     language: cpp
