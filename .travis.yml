@@ -27,6 +27,7 @@ matrix:
     language: cpp
     os: osx
     before_install:
+      - pip install --user awscli
       - wget -O premake5.tar.gz https://github.com/premake/premake-core/releases/download/v5.0.0-alpha14/premake-5.0.0-alpha14-macosx.tar.gz
       - tar -xf premake5.tar.gz
       - export PATH=$PATH:$PWD
@@ -40,12 +41,15 @@ matrix:
       - cd build/xcode4/
     install: true
     script: xcodebuild -configuration Release
+    after_success:
+      - aws s3 cp bin/Release/fbx-conv s3://fbx-conv/mac/
   - name: "Windows FBX-Conv build"
     language: cpp
     os: windows
     env:
       - MSBUILD_PATH="c:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin"
     before_install:
+      - pip install --user awscli
       - choco install 7zip
       - wget -O premake5.zip https://github.com/premake/premake-core/releases/download/v5.0.0-alpha14/premake-5.0.0-alpha14-windows.zip
       - unzip premake5.zip
@@ -58,3 +62,5 @@ matrix:
       - cd build/vs2015/
     install: true
     script: MSBuild.exe fbx-conv.sln /property:Configuration=Release
+    after_success:
+      - aws s3 cp bin/Release/fbx-conv s3://fbx-conv/win/
