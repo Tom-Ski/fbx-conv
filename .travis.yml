@@ -52,6 +52,8 @@ matrix:
       - choco install python3 --version 3.7.4 --params "/InstallDir:C:\\Python"
       - export PATH="/c/Python:/c/Python/Scripts:$PATH"
       - python -m pip install --upgrade pip wheel
+      - pip3 install awscli
+      - aws --version
       - choco install 7zip
       - wget -O premake5.zip https://github.com/premake/premake-core/releases/download/v5.0.0-alpha14/premake-5.0.0-alpha14-windows.zip
       - unzip premake5.zip
