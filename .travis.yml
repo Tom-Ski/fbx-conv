@@ -64,4 +64,4 @@ matrix:
     install: true
     script: MSBuild.exe fbx-conv.sln /property:Configuration=Release
     after_success:
-      - aws s3 cp bin/Release/fbx-conv s3://fbx-conv/win/
+      - aws s3 cp bin/Release/fbx-conv.exe s3://fbx-conv/win/
