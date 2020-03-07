@@ -22,6 +22,7 @@ matrix:
     install: true
     script: make config=release
     after_success:
+      - ls $LD_LIBRARY_PATH
       - cp $LD_LIBRARY_PATH/libfbxsdk.so bin/Release/
       - zip fbx-conv-linux.zip bin/Release/libfbxsdk.so bin/Release/fbx-conv
       - aws s3 cp fbx-conv-linux.zip s3://fbx-conv/linux/
@@ -29,7 +30,7 @@ matrix:
     language: cpp
     os: osx
     before_install:
-      - brew install awscli
+      - pip3 install awscli
       - wget -O premake5.tar.gz https://github.com/premake/premake-core/releases/download/v5.0.0-alpha14/premake-5.0.0-alpha14-macosx.tar.gz
       - tar -xf premake5.tar.gz
       - export PATH=$PATH:$PWD
