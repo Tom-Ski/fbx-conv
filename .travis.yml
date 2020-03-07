@@ -17,13 +17,13 @@ matrix:
       - yes yes | ./fbx20190_fbxsdk_linux fbx-sdk-linux
       - export FBX_SDK_ROOT=$PWD/fbx-sdk-linux
       - export LD_LIBRARY_PATH=$FBX_SDK_ROOT/lib/gcc/x64/release
+      - apt-get -y install tree
+      - tree $FBX_SDK_ROOT
       - ./generate_makefile
       - cd build/gmake/
     install: true
     script: make config=release
     after_success:
-      - tree $FBX_SDK_ROOT
-      - ls $LD_LIBRARY_PATH
       - cp $LD_LIBRARY_PATH/libfbxsdk.so bin/Release/
       - zip fbx-conv-linux.zip bin/Release/libfbxsdk.so bin/Release/fbx-conv
       - aws s3 cp fbx-conv-linux.zip s3://fbx-conv/linux/
