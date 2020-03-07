@@ -20,6 +20,8 @@ matrix:
       - cd build/gmake/
     install: true
     script: make config=release
+    after_success:
+      - aws s3 cp . s3://s3.amazonaws.com/fbx-conv/linux/
   - name: "OSX FBX-Conv build"
     language: cpp
     os: osx
@@ -54,4 +56,4 @@ matrix:
       - generate_vs2015.bat
       - cd build/vs2015/
     install: true
-    script: MSBuild.exe fbx-conv.sln /property:Configuration=Release 
+    script: MSBuild.exe fbx-conv.sln /property:Configuration=Release
