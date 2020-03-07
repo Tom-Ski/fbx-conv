@@ -16,13 +16,13 @@ matrix:
       - mkdir fbx-sdk-linux
       - yes yes | ./fbx20190_fbxsdk_linux fbx-sdk-linux
       - export FBX_SDK_ROOT=$PWD/fbx-sdk-linux
-      - export LD_LIBRARY_PATH=$FBX_SDK_ROOT/lib/gcc/x64/release/
+      - export LD_LIBRARY_PATH=$FBX_SDK_ROOT/lib/gcc/x64/release
       - ./generate_makefile
       - cd build/gmake/
     install: true
     script: make config=release
     after_success:
-      - cp "$LD_LIBRARY_PATHlibfbxsdk.so" bin/Release/
+      - cp $LD_LIBRARY_PATH/libfbxsdk.so bin/Release/
       - zip fbx-conv-linux.zip bin/Release/libfbxsdk.so bin/Release/fbx-conv
       - aws s3 cp fbx-conv-linux.zip s3://fbx-conv/linux/
   - name: "OSX FBX-Conv build"
@@ -38,13 +38,13 @@ matrix:
       - sudo installer -pkg fbx20190_fbxsdk_clang_macos.pkg -target /
       - sudo mv "/Applications/Autodesk/FBX SDK/" /Applications/Autodesk/SDK/
       - export FBX_SDK_ROOT=/Applications/Autodesk/SDK/2019.0/
-      - export LD_LIBRARY_PATH=/Applications/Autodesk/SDK/2019.0/lib/clang/release/
+      - export LD_LIBRARY_PATH=/Applications/Autodesk/SDK/2019.0/lib/clang/release
       - ./generate_xcode
       - cd build/xcode4/
     install: true
     script: xcodebuild -configuration Release
     after_success:
-      - cp "$LD_LIBRARY_PATHlibfbxsdk.dylib" bin/Release/
+      - cp $LD_LIBRARY_PATH/libfbxsdk.dylib bin/Release/
       - zip fbx-conv-mac.zip bin/Release/libfbxsdk.dylib bin/Release/fbx-conv
       - aws s3 cp fbx-conv-mac.zip s3://fbx-conv/mac/
   - name: "Windows FBX-Conv build"
