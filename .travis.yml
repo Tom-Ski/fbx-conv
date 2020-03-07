@@ -22,7 +22,7 @@ matrix:
     install: true
     script: make config=release
     after_success:
-      - ls
+      - ls bin/
       - aws s3 cp . s3://s3.amazonaws.com/fbx-conv/linux/
   - name: "OSX FBX-Conv build"
     language: cpp
