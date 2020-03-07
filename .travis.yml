@@ -17,7 +17,7 @@ matrix:
       - yes yes | ./fbx20190_fbxsdk_linux fbx-sdk-linux
       - export FBX_SDK_ROOT=$PWD/fbx-sdk-linux
       - export LD_LIBRARY_PATH=$FBX_SDK_ROOT/lib/gcc/x64/release
-      - apt-get -y install tree
+      - sudo apt-get -y install tree
       - tree $FBX_SDK_ROOT
       - ./generate_makefile
       - cd build/gmake/
